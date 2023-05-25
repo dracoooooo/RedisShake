@@ -83,7 +83,13 @@ func main() {
 	if config.Config.Type == "sync" {
 		theReader = reader.NewPSyncReader(source.Address, source.Username, source.Password, source.IsTLS, source.ElastiCachePSync)
 	} else if config.Config.Type == "restore" {
-		theReader = reader.NewRDBReader(source.RDBFilePath)
+		if config.Config.Source.FileFormat == "rdb" {
+			theReader = reader.NewRDBReader(source.RDBFilePath)
+		} else if config.Config.Source.FileFormat == "aof" {
+			theReader = reader.NewAOFReader(source.AOFFilePath)
+		} else {
+			log.Panicf("unknown source file format: %s", config.Config.Source.FileFormat)
+		}
 	} else if config.Config.Type == "scan" {
 		theReader = reader.NewScanReader(source.Address, source.Username, source.Password, source.IsTLS)
 	} else {

@@ -19,7 +19,9 @@ type tomlSource struct {
 	ElastiCachePSync string  `toml:"elasticache_psync"`
 
 	// restore mode
+	FileFormat  string `toml:"file_format"`
 	RDBFilePath string `toml:"rdb_file_path"`
+	AOFFilePath string `toml:"aof_file_path"`
 }
 
 type tomlTarget struct {

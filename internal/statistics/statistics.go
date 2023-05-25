@@ -29,6 +29,9 @@ type metrics struct {
 	// aof
 	AofReceivedOffset uint64 `json:"aof_received_offset"`
 	AofAppliedOffset  uint64 `json:"aof_applied_offset"`
+	AofFileSize       uint64 `json:"aof_file_size"`
+	AofReceivedSize   uint64 `json:"aof_received_size"`
+	AofSendSize       uint64 `json:"aof_send_size"`
 
 	// for performance debug
 	InQueueEntriesCount  uint64 `json:"in_queue_entries_count"`
@@ -145,6 +148,9 @@ func UpdateAOFReceivedOffset(offset uint64) {
 }
 func UpdateAOFAppliedOffset(offset uint64) {
 	Metrics.AofAppliedOffset = offset
+}
+func UpdateAOFSentSize(offset uint64) {
+	Metrics.AofSendSize = offset
 }
 
 // for debug
